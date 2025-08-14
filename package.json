@@ -1,0 +1,22 @@
+{
+  "name": "doc_ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build":"tsc",
+    "dev":"ts-node ./bin/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "del": "npm uninstall -g doc_ai \n npm install -g ."
+  },
+  "bin": {
+    "docai": "./bin/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ts-node": "^10.9.2"
+  }
+}
