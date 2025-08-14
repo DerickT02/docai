@@ -7,7 +7,7 @@
     "build":"tsc",
     "dev":"ts-node ./bin/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "del": "npm uninstall -g doc_ai \n npm install -g ."
+    "update": "npm uninstall -g doc_ai \n npm install -g ."
   },
   "bin": {
     "docai": "./bin/index.ts"
