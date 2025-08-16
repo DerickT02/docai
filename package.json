@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build":"tsc",
-    "dev":"ts-node ./bin/index.ts",
+    "build": "tsc",
+    "dev": "ts-node ./bin/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "update": "npm uninstall -g doc_ai \n npm install -g ."
   },
@@ -15,8 +15,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
+    "@langchain/community": "^0.3.50",
+    "@langchain/core": "^0.3.70",
+    "@langchain/langgraph": "^0.4.5",
+    "@langchain/openai": "^0.6.7",
+    "dotenv": "^17.2.1",
     "ts-node": "^10.9.2"
   }
 }
