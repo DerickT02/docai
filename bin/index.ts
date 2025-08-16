@@ -3,12 +3,15 @@ import readline from 'readline'
 import path  from 'path'
 import fs from 'fs'
 import tsAnalysisTree from './models/tsAnalysisModel.ts'
+import analyzeCode from './models/tsAnalysisModel.ts'
+import { analyzeProject } from './langgraph/codeAnalysis.ts'
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
 const ignore = [".git", "node_modules"];
+let summaries: any = [];
  async function readFilesFromDirectory(currPath: string = process.cwd(), level = 0){
     try {
         const files = await fs.promises.readdir(currPath, {withFileTypes: true})  // cwd = where you ran the script
@@ -31,10 +34,15 @@ const ignore = [".git", "node_modules"];
                     }
                     else{
                         if(f.name.includes('.ts')){
-                            tsAnalysisTree(relativePath)
+                            let partialSummary = await analyzeCode(relativePath);
+                            summaries.push(partialSummary);
+                            
                     }
+
+
                 }
             }
+            analyzeProject(summaries);
         }
     } catch (err) {
         console.error("Error reading directory:", err)
@@ -49,6 +57,7 @@ function shell(){
         }
         else if(ans == "scan"){
             await readFilesFromDirectory()
+            console.log("Standby for PDF Generation")
         }
         shell()
     })

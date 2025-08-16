@@ -1,5 +1,5 @@
 import fs from 'fs/promises';
-import { analyzeCode } from '../langgraph/codeAnalysis.ts';
+import { callModel } from '../langgraph/codeAnalysis.ts';
 
 export function startSpinner(message: string = "Processing") {
     const spinnerFrames = ['-', '\\', '|', '/'];
@@ -15,18 +15,16 @@ export function startSpinner(message: string = "Processing") {
     };
 }
 
-export default async function analyzeTree(filePath: string) {
-    try {
+export default async function analyzeCode(filePath: string) {
+
         const code = await fs.readFile(filePath, 'utf-8'); // await the read
 
         const stopSpinner = startSpinner("Analyzing code");
 
 
-        const result = await analyzeCode(code);           // await the analysis
+        const result = await callModel(filePath, code);           // await the analysis
         console.log(result);
+        stopSpinner();
+        return result;
 
-        stopSpinner()
-    } catch (err) {
-        console.error("Error reading or analyzing file:", err);
-    }
 }
